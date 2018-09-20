@@ -39,10 +39,48 @@ run `polish_genbank`
 
 
 
+## 4 Used in scripts
+
+    In [1]: from polish_genbank import polish_gb, polish_fasta
+
+    In [2]: polish_gb?
+    Signature: polish_gb(ingb=None, NewInternalStopCodonNT='NNN', NewInternalStopCodonAA='X', logger=None)
+    Docstring:
+    Replace the internal stop codon with NNNs on Genbank nt sequence,
+    and replace the '*' in 'translation' tag (protein sequence) with 'X'
+
+    Return:
+        An generator.
+
+    Usage:
+
+    >>> records = polish_gb(ingb='in.gb', NewInternalStopCodonNT='NNN',
+            NewInternalStopCodonAA='X')
+    >>> for rec in records:
+    >>>     print(rec.id, rec.seq)
+
+
+    In [3]: polish_fasta?
+    Signature: polish_fasta(infasta=None, NewInternalStopCodonNT='NNN', table=2, logger=None)
+    Docstring:
+    Replace the internal stop codon with NNNs.
+
+    The infasta file is assumed to be CDS sequences, and coding from +1
+    position.
+
+    Return:
+        An generator.
+
+    Usage:
+
+    >>> records = polish_fasta(infasta='myfile', NewInternalStopCodonNT='NNN', table=2)
+    >>> for rec in records:
+    >>>     print(rec.id, rec.seq)
+
 ## 5 Citation
 Currently I have no plan to publish `polish_genbank`.
 
-However, since `msa_cigars` makes use of `Biopython`, you should also cite it if you use `breakSeqInNs_then_translate` in your work:
+However, since `polish_genbank` makes use of `Biopython`, you should also cite it if you use `breakSeqInNs_then_translate` in your work:
 
     Peter J. A. Cock, Tiago Antao, Jeffrey T. Chang, Brad A. Chapman, Cymon J. Cox, Andrew Dalke, Iddo Friedberg, Thomas Hamelryck, Frank Kauff, Bartek Wilczynski, Michiel J. L. de Hoon: “Biopython: freely available Python tools for computational molecular biology and bioinformatics”. Bioinformatics 25 (11), 1422–1423 (2009). https://doi.org/10.1093/bioinformatics/btp163
 
